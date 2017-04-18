@@ -6,7 +6,11 @@ Record info about machine learning Python tutorial.
 ## Practical Machine Learning Tutorial with Python Introduction
 https://pythonprogramming.net/machine-learning-tutorial-python-introduction/
 
+## quandl
+Can use some data for free, limited to ~50 calls per day.
+Can get an account and pay for more data.
 https://www.quandl.com/
+https://github.com/quandl/quandl-python
 
 # Results
 
