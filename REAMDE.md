@@ -27,3 +27,9 @@ pandas
 
 https://anaconda.org/anaconda/quandl
 I used Anaconda navigator. Created environment machine_learning. Then installed quandl.
+
+### supervised machine learning
+features and labels
+#### features
+attributes, for stock prices it's the "continous data" (time series?)
+#### labels
