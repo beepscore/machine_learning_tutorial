@@ -3,10 +3,14 @@
 import pandas as pd
 import quandl
 
+"""
+https://pythonprogramming.net/regression-introduction-machine-learning-tutorial/
+"""
+
 # dataframe
 df = quandl.get('WIKI/GOOGL')
-
 # print(df.head())
+# each column is a "feature"
 """
 /Users/stevebaker/anaconda/envs/machine_learning/bin/python /Users/stevebaker/Documents/projects/pythonProjects/machine_learning_tutorial/machine_learning_tutorial/stock.py
               Open    High     Low    Close      Volume  Ex-Dividend  \
@@ -34,4 +38,23 @@ Date
 2004-08-25    9188600.0  
 
 Process finished with exit code 0
+"""
+
+# just use adjusted data
+df = df[['Adj. Open', 'Adj. High', 'Adj. Low', 'Adj. Close', 'Adj. Volume']]
+# video showed incorrect equation, he fixed it in notes
+# Add new column HL_PCT. high and low are highly correlated.
+df['HL_PCT'] = 100.0 * (df['Adj. High'] - df['Adj. Low']) / df['Adj. Close']
+df['PCT_CHANGE'] = 100.0 * (df['Adj. Close'] - df['Adj. Open']) / df['Adj. Open']
+
+df = df[['Adj. Close', 'HL_PCT', 'PCT_CHANGE', 'Adj. Volume']]
+print(df.head())
+"""
+            Adj. Close    HL_PCT  PCT_CHANGE  Adj. Volume
+Date                                                     
+2004-08-19   50.322842  8.072956    0.324968   44659000.0
+2004-08-20   54.322689  7.921706    7.227007   22834300.0
+2004-08-23   54.869377  4.049360   -1.227880   18256100.0
+2004-08-24   52.597363  7.657099   -5.726357   15247300.0
+2004-08-25   53.164113  3.886792    1.183658    9188600.0
 """
