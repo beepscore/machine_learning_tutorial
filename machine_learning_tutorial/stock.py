@@ -93,7 +93,7 @@ Date
 df.dropna(inplace=True)
 
 # print(df.tail())
-print(df.head())
+# print(df.head())
 """
             Adj. Close    HL_PCT  PCT_CHANGE  Adj. Volume      label
 Date                                                                
