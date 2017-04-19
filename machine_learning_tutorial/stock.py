@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import math
 import pandas as pd
 import quandl
 
@@ -48,7 +49,7 @@ df['HL_PCT'] = 100.0 * (df['Adj. High'] - df['Adj. Low']) / df['Adj. Close']
 df['PCT_CHANGE'] = 100.0 * (df['Adj. Close'] - df['Adj. Open']) / df['Adj. Open']
 
 df = df[['Adj. Close', 'HL_PCT', 'PCT_CHANGE', 'Adj. Volume']]
-print(df.head())
+# print(df.head())
 """
             Adj. Close    HL_PCT  PCT_CHANGE  Adj. Volume
 Date                                                     
@@ -57,4 +58,48 @@ Date
 2004-08-23   54.869377  4.049360   -1.227880   18256100.0
 2004-08-24   52.597363  7.657099   -5.726357   15247300.0
 2004-08-25   53.164113  3.886792    1.183658    9188600.0
+"""
+
+forecast_col = 'Adj. Close'
+
+# handle missing data
+# "You can't just pass a NaN (Not a Number) datapoint to a machine learning classifier..."
+# so specify a large negative value. It will be treated as an outlier.
+df.fillna(-99999, inplace=True)
+
+# extrapolate ~ 10% past end of data range
+# forecast_out = int(math.ceil(0.1*len(df)))
+# after this, the video changed from 0.1 to 0.01
+forecast_out = int(math.ceil(0.01*len(df)))
+
+# specify the "label" column
+# label is forecast stock price adjusted close 1% past end of range
+df['label'] = df[forecast_col].shift(-forecast_out)
+
+# print(df.head())
+
+# the first colums are "features", the "label" column is extrapolating into the future.
+# with forecast_out = int(math.ceil(0.1*len(df)))
+"""
+            Adj. Close    HL_PCT  PCT_CHANGE  Adj. Volume       label
+Date                                                                 
+2004-08-19   50.322842  8.072956    0.324968   44659000.0  208.879792
+2004-08-20   54.322689  7.921706    7.227007   22834300.0  212.084685
+2004-08-23   54.869377  4.049360   -1.227880   18256100.0  214.973603
+2004-08-24   52.597363  7.657099   -5.726357   15247300.0  212.395645
+2004-08-25   53.164113  3.886792    1.183658    9188600.0  202.394773
+"""
+
+df.dropna(inplace=True)
+
+# print(df.tail())
+print(df.head())
+"""
+            Adj. Close    HL_PCT  PCT_CHANGE  Adj. Volume      label
+Date                                                                
+2004-08-19   50.322842  8.072956    0.324968   44659000.0  69.399229
+2004-08-20   54.322689  7.921706    7.227007   22834300.0  68.752232
+2004-08-23   54.869377  4.049360   -1.227880   18256100.0  69.639972
+2004-08-24   52.597363  7.657099   -5.726357   15247300.0  69.078238
+2004-08-25   53.164113  3.886792    1.183658    9188600.0  67.839414
 """
