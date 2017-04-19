@@ -78,7 +78,7 @@ df['label'] = df[forecast_col].shift(-forecast_out)
 
 # print(df.head())
 
-# the first colums are "features", the "label" column is extrapolating into the future.
+# the first columns are "features", the "label" column is extrapolating into the future.
 # with forecast_out = int(math.ceil(0.1*len(df)))
 """
             Adj. Close    HL_PCT  PCT_CHANGE  Adj. Volume       label
