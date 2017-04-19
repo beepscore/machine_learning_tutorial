@@ -125,20 +125,27 @@ X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_s
 # Choosing the right estimator
 # http://scikit-learn.org/stable/tutorial/machine_learning_map/
 #  Use SVR support vector regression
-# use defaults
+# use defaults, e.g. default kernel is rbf
 # http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html
 # doesn't have n_jobs parameter, so can't run in multiple threads
-classifier_svm = svm.SVR()
+# classifier_svm = svm.SVR()
 
-# train the classifier
-classifier_svm.fit(X_train, y_train)
+#  Use SVR support vector regression with several different kernels
+for k in ['linear', 'poly', 'rbf', 'sigmoid']:
+    classifier_svm = svm.SVR(kernel=k)
+    # train the classifier
+    classifier_svm.fit(X_train, y_train)
+    # test the classifier
+    confidence = classifier_svm.score(X_test, y_test)
+    # print(k, confidence)
+    """
+    linear 0.96698805392
+    poly 0.711236066716
+    rbf 0.815715492338
+    sigmoid 0.896009413564
+    """
 
-# test the classifier
-confidence = classifier_svm.score(X_test, y_test)
-# print(confidence)
-# 0.814618522666
-
-# use n_jobs parameter to run in multiple threads
+# use LinearRegression with n_jobs parameter to run in multiple threads
 # -1 use all available threads
 # http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
 classifier_linear = LinearRegression(n_jobs=-1)
