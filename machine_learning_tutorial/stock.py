@@ -126,6 +126,8 @@ X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_s
 # http://scikit-learn.org/stable/tutorial/machine_learning_map/
 #  Use SVR support vector regression
 # use defaults
+# http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html
+# doesn't have n_jobs parameter, so can't run in multiple threads
 classifier_svm = svm.SVR()
 
 # train the classifier
@@ -136,7 +138,10 @@ confidence = classifier_svm.score(X_test, y_test)
 # print(confidence)
 # 0.814618522666
 
-classifier_linear = LinearRegression()
+# use n_jobs parameter to run in multiple threads
+# -1 use all available threads
+# http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
+classifier_linear = LinearRegression(n_jobs=-1)
 
 # train the classifier
 classifier_linear.fit(X_train, y_train)
