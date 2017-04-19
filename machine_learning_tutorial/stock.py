@@ -119,6 +119,7 @@ y = np.array(df['label'])
 
 # use model_selection instead of deprecated cross_validation shown in video.
 # X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2)
+# use 20% of data for testing, 80% for training
 X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size=0.2)
 
 # define classifier.
