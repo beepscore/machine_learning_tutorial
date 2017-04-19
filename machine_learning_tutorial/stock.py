@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
 import math
-import pandas as pd
+import numpy as np
+#import pandas as pd
 import quandl
+from sklearn import preprocessing, model_selection, svm
+from sklearn.linear_model import LinearRegression
 
 """
 https://pythonprogramming.net/regression-introduction-machine-learning-tutorial/
@@ -103,3 +106,43 @@ Date
 2004-08-24   52.597363  7.657099   -5.726357   15247300.0  69.078238
 2004-08-25   53.164113  3.886792    1.183658    9188600.0  67.839414
 """
+
+# It is a typical standard with machine learning in code to define X (capital x), as the features,
+# and y (lowercase y) as the label that corresponds to the features
+# features X is numpy array, using entire dataframe except for label column
+X = np.array(df.drop(['label'], 1))
+# scale features from -1 to 1
+X = preprocessing.scale(X)
+
+# label y is a numpy array from dataframe label column
+y = np.array(df['label'])
+
+# use model_selection instead of deprecated cross_validation shown in video.
+# X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2)
+X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size=0.2)
+
+# define classifier.
+# Choosing the right estimator
+# http://scikit-learn.org/stable/tutorial/machine_learning_map/
+#  Use SVR support vector regression
+# use defaults
+classifier_svm = svm.SVR()
+
+# train the classifier
+classifier_svm.fit(X_train, y_train)
+
+# test the classifier
+confidence = classifier_svm.score(X_test, y_test)
+# print(confidence)
+# 0.814618522666
+
+classifier_linear = LinearRegression()
+
+# train the classifier
+classifier_linear.fit(X_train, y_train)
+
+# test the classifier
+confidence = classifier_linear.score(X_test, y_test)
+# print(confidence)
+# linear confidence is higher than svm
+# 0.971044562584
