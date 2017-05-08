@@ -29,8 +29,6 @@ scikit-learn
 quandl
 pandas
 
-https://anaconda.org/anaconda/quandl
-I used Anaconda navigator. Created environment machine_learning. Then installed quandl.
 
 ### supervised machine learning
 features and labels
@@ -38,3 +36,11 @@ features and labels
 descriptive attributes, for stock prices it's the "continuous data" (time series?)
 #### labels
 what you want to predict or forecast
+
+## Appendix - Anaconda
+I used Anaconda navigator. Created environment machine_learning.
+Installed quandl
+https://anaconda.org/anaconda/quandl
+
+matplotlib was in environment root, but not in machine_learning.
+Installed matplotlib in machine_learning.
