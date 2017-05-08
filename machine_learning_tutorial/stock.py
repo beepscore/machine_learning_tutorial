@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
+import datetime
 import math
+import matplotlib.pyplot as plt
+from matplotlib import style
 import numpy as np
 #import pandas as pd
 import quandl
@@ -13,6 +16,8 @@ from sklearn.linear_model import LinearRegression
 """
 https://pythonprogramming.net/regression-introduction-machine-learning-tutorial/
 """
+
+style.use('ggplot')
 
 # df is a pandas dataframe
 df = quandl.get('WIKI/GOOGL')
@@ -96,8 +101,6 @@ Date
 2004-08-24   52.597363  7.657099   -5.726357   15247300.0  212.395645
 2004-08-25   53.164113  3.886792    1.183658    9188600.0  202.394773
 """
-
-# df.dropna(inplace=True)
 
 # print(df.tail())
 # print(df.head())
@@ -188,3 +191,24 @@ print(forecast_set, confidence, forecast_out)
 
 # stock prices are daily 5 weekdays/week.
 # for simplicity, ignore weekends
+
+df['Forecast'] = np.nan
+
+last_date = df.iloc[-1].name
+last_unix = last_date.timestamp()
+one_day_seconds = 86400
+next_unix = last_unix + one_day_seconds
+
+for i in forecast_set:
+    next_date = datetime.datetime.fromtimestamp(next_unix)
+    next_unix += one_day_seconds
+    # set all first columns to nan, set final column to i
+    df.loc[next_date] = [np.nan for _ in range(len(df.columns) - 1)] + [i]
+
+# graph
+df['Adj. Close'].plot()
+df['Forecast'].plot()
+plt.legend(loc=4)
+plt.xlabel('Date')
+plt.ylabel('Price')
+plt.show()
