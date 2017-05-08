@@ -14,7 +14,7 @@ from sklearn.linear_model import LinearRegression
 https://pythonprogramming.net/regression-introduction-machine-learning-tutorial/
 """
 
-# dataframe
+# df is a pandas dataframe
 df = quandl.get('WIKI/GOOGL')
 # print(df.head())
 # each column is a "feature"
@@ -80,6 +80,7 @@ forecast_out = int(math.ceil(0.01*len(df)))
 
 # specify the "label" column
 # label is forecast stock price adjusted close 1% past end of range
+# pandas shift method takes a column and shifts its values by an amount
 df['label'] = df[forecast_col].shift(-forecast_out)
 
 # print(df.head())

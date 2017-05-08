@@ -35,5 +35,6 @@ I used Anaconda navigator. Created environment machine_learning. Then installed 
 ### supervised machine learning
 features and labels
 #### features
-attributes, for stock prices it's the "continous data" (time series?)
+descriptive attributes, for stock prices it's the "continuous data" (time series?)
 #### labels
+what you want to predict or forecast
