@@ -1,2 +1,6 @@
 quandl
-sklearn
+
+# warning Package requirement sklearn is not satisfied
+# http://scikit-learn.org/stable/install.html
+# comment it out for now
+# sklearn
