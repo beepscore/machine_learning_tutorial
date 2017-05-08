@@ -97,7 +97,7 @@ Date
 2004-08-25   53.164113  3.886792    1.183658    9188600.0  202.394773
 """
 
-df.dropna(inplace=True)
+# df.dropna(inplace=True)
 
 # print(df.tail())
 # print(df.head())
@@ -118,6 +118,13 @@ X = np.array(df.drop(['label'], 1))
 # scale features from -1 to 1
 X = preprocessing.scale(X)
 
+# X_lately contains the most recent features
+X_lately = X[-forecast_out:]
+
+X = X[:-forecast_out]
+
+df.dropna(inplace=True)
+
 # label y is a numpy array from dataframe label column
 y = np.array(df['label'])
 
@@ -129,28 +136,31 @@ X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_s
 # define classifier.
 # Choosing the right estimator
 # http://scikit-learn.org/stable/tutorial/machine_learning_map/
-#  Use SVR support vector regression
+
+
+# Use SVR support vector regression
 # use defaults, e.g. default kernel is rbf
 # http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html
 # doesn't have n_jobs parameter, so can't run in multiple threads
 # classifier_svm = svm.SVR()
 
 #  Use SVR support vector regression with several different kernels
-for k in ['linear', 'poly', 'rbf', 'sigmoid']:
-    classifier_svm = svm.SVR(kernel=k)
-    # train the classifier
-    classifier_svm.fit(X_train, y_train)
-    # test the classifier
-    confidence = classifier_svm.score(X_test, y_test)
-    # print(k, confidence)
-    """
-    linear 0.96698805392
-    poly 0.711236066716
-    rbf 0.815715492338
-    sigmoid 0.896009413564
-    """
+# for k in ['linear', 'poly', 'rbf', 'sigmoid']:
+#     classifier_svm = svm.SVR(kernel=k)
+#     # train the classifier
+#     classifier_svm.fit(X_train, y_train)
+#     # test the classifier
+#     confidence = classifier_svm.score(X_test, y_test)
+#     # print(k, confidence)
+#     """
+#     linear 0.96698805392
+#     poly 0.711236066716
+#     rbf 0.815715492338
+#     sigmoid 0.896009413564
+#     """
 
-# use LinearRegression with n_jobs parameter to run in multiple threads
+
+# Use LinearRegression with n_jobs parameter to run in multiple threads
 # -1 use all available threads
 # http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
 classifier_linear = LinearRegression(n_jobs=-1)
@@ -163,3 +173,18 @@ confidence = classifier_linear.score(X_test, y_test)
 # print(confidence)
 # linear confidence is higher than svm
 # 0.971044562584
+
+forecast_set = classifier_linear.predict(X_lately)
+print(forecast_set, confidence, forecast_out)
+"""
+[ 857.56897904  858.86638568  847.97894709  843.53917183  846.90307581
+  849.3825905   858.81564451  858.89407076  857.10184499  865.38685965
+  861.82648018  857.46670623  854.01976444  851.27589453  851.0825656
+  849.03368375  850.80996207  849.55907194  863.96872717  863.34746195
+  865.75466149  869.28435532  868.26344175  887.43874297  897.20895289
+  898.05773845  900.25665875  932.01004505  940.76638004  945.38434036
+  956.53850889  962.86946649  958.62109155] 0.969901311727 33
+"""
+
+# stock prices are daily 5 weekdays/week.
+# for simplicity, ignore weekends
