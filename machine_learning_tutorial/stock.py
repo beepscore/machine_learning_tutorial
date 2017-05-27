@@ -137,7 +137,7 @@ y = np.array(df['label'])
 # use 20% of data for testing, 80% for training
 X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size=0.2)
 
-# define classifier.
+# define the classifier
 # Choosing the right estimator
 # http://scikit-learn.org/stable/tutorial/machine_learning_map/
 
