@@ -214,3 +214,15 @@ plt.xlabel('Date')
 plt.ylabel('Price')
 # plot image appears in a pop up window
 plt.show()
+
+# save the trained classifier.
+# training a classifier may take a long time and be expensive.
+# By saving a trained classifier, we don't have to re-run the training.
+# save python classifier object by serializing it a pickle and writing to a file
+with open('linearregression.pickle', 'wb') as f:
+    pickle.dump(classifier_linear, f)
+
+# read file and deserialize the object
+pickle_in = open('linearregression.pickle', 'rb')
+classifier_linear = pickle.load(pickle_in)
+
