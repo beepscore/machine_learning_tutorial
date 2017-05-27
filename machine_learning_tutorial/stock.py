@@ -5,7 +5,8 @@ import math
 import matplotlib.pyplot as plt
 from matplotlib import style
 import numpy as np
-#import pandas as pd
+# import pandas as pd
+import pickle
 import quandl
 
 # sklearn represents scikit-learn
