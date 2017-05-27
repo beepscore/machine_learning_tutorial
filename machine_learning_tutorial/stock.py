@@ -219,10 +219,16 @@ plt.show()
 # training a classifier may take a long time and be expensive.
 # By saving a trained classifier, we don't have to re-run the training.
 # save python classifier object by serializing it a pickle and writing to a file
-with open('linearregression.pickle', 'wb') as f:
+
+output_directory = "../data/output/"
+output_file_name = "linearregression.pickle"
+output_file_path = output_directory + output_file_name
+
+with open(output_file_path, 'wb') as f:
     pickle.dump(classifier_linear, f)
 
 # read file and deserialize the object
-pickle_in = open('linearregression.pickle', 'rb')
+pickle_in = open(output_file_path, 'rb')
 classifier_linear = pickle.load(pickle_in)
+print(classifier_linear.__dict__)
 
