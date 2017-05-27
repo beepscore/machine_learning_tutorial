@@ -107,7 +107,7 @@ Date
 # print(df.head())
 """
             Adj. Close    HL_PCT  PCT_CHANGE  Adj. Volume      label
-Date                                                                
+Date
 2004-08-19   50.322842  8.072956    0.324968   44659000.0  69.399229
 2004-08-20   54.322689  7.921706    7.227007   22834300.0  68.752232
 2004-08-23   54.869377  4.049360   -1.227880   18256100.0  69.639972
@@ -206,7 +206,7 @@ for i in forecast_set:
     # set all first columns to nan, set final column to i
     df.loc[next_date] = [np.nan for _ in range(len(df.columns) - 1)] + [i]
 
-# graph
+# plot the forecast result in a graph
 df['Adj. Close'].plot()
 df['Forecast'].plot()
 plt.legend(loc=4)
@@ -214,6 +214,11 @@ plt.xlabel('Date')
 plt.ylabel('Price')
 # plot image appears in a pop up window
 plt.show()
+# first user must manually close window.
+# then python will execute close() command too.
+# without close(), python terminal appears blocked.
+# with close(), script continues, writes file and terminal returns to command line prompt
+plt.close()
 
 # save the trained classifier.
 # training a classifier may take a long time and be expensive.
