@@ -211,4 +211,5 @@ df['Forecast'].plot()
 plt.legend(loc=4)
 plt.xlabel('Date')
 plt.ylabel('Price')
+# plot image appears in a pop up window
 plt.show()
