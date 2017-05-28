@@ -52,10 +52,11 @@ print('accuracy', accuracy)
 # fake data, doesn't match any row in data set
 example_measures = np.array([4, 2, 1, 1, 1, 2, 3, 2, 1])
 
-# As tutorial notes, predict throws a deprecation warning
+# reshape one dimensional fake data to avoid deprecation warning
 # DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and will raise ValueError in 0.19.
-# Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample.
-  DeprecationWarning)
+# Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample. DeprecationWarning)
+example_measures = example_measures.reshape(1, -1)
+
 prediction = clf.predict(example_measures)
 # prints prediction [2]
 print('prediction', prediction)
