@@ -28,6 +28,7 @@ df.drop(['id'], 1, inplace=True)
 # X features
 X = np.array(df.drop(['class'], 1))
 # y labels
+# in data set, class values appear to be 2 or 4
 y = np.array(df['class'])
 
 # divide data into training and testing samples
@@ -47,3 +48,14 @@ clf.fit(X_train, y_train)
 accuracy = clf.score(X_test, y_test)
 # expect accuracy ~ 0.95
 print('accuracy', accuracy)
+
+# fake data, doesn't match any row in data set
+example_measures = np.array([4, 2, 1, 1, 1, 2, 3, 2, 1])
+
+# As tutorial notes, predict throws a deprecation warning
+# DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and will raise ValueError in 0.19.
+# Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample.
+  DeprecationWarning)
+prediction = clf.predict(example_measures)
+# prints prediction [2]
+print('prediction', prediction)
