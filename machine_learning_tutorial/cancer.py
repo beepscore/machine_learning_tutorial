@@ -49,14 +49,19 @@ accuracy = clf.score(X_test, y_test)
 # expect accuracy ~ 0.95
 print('accuracy', accuracy)
 
-# fake data, doesn't match any row in data set
-example_measures = np.array([4, 2, 1, 1, 1, 2, 3, 2, 1])
-
+# fake data, doesn't match any rows in data set
+# one row
+# example_measures = np.array([4, 2, 1, 1, 1, 2, 3, 2, 1])
 # reshape one dimensional fake data to avoid deprecation warning
 # DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and will raise ValueError in 0.19.
 # Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample. DeprecationWarning)
-example_measures = example_measures.reshape(1, -1)
+# example_measures = example_measures.reshape(1, -1)
+
+# two rows
+example_measures = np.array([[4, 2, 1, 1, 1, 2, 3, 2, 1], [4, 2, 1, 1, 1, 2, 3, 2, 1]])
+example_measures = example_measures.reshape(2, -1)
 
 prediction = clf.predict(example_measures)
-# prints prediction [2]
+# one row prints prediction [2]
+# two rows prints prediction [2 2]
 print('prediction', prediction)
