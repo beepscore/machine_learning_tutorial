@@ -16,6 +16,9 @@ https://github.com/quandl/quandl-python
 ## UCI machine learning repository - data sets
 https://archive.ics.uci.edu/ml/datasets.html
 
+### Breast cancer data set
+https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Original%29
+
 # Results
 
 ## topics
