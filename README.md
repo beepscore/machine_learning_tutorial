@@ -12,6 +12,10 @@ Can get an account and pay for more data.
 https://www.quandl.com/
 https://github.com/quandl/quandl-python
 
+
+## UCI machine learning repository - data sets
+https://archive.ics.uci.edu/ml/datasets.html
+
 # Results
 
 ## topics
