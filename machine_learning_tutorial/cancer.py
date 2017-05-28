@@ -28,7 +28,7 @@ df.drop(['id'], 1, inplace=True)
 # X features
 X = np.array(df.drop(['class'], 1))
 # y labels
-# in data set, class values appear to be 2 or 4
+# data set class values:  2 for benign, 4 for malignant
 y = np.array(df['class'])
 
 # divide data into training and testing samples
