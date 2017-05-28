@@ -121,6 +121,7 @@ venv/*
 
 # program data files
 data/*
+!data/input
 
 # csv files
 *.csv
