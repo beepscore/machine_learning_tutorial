@@ -32,6 +32,8 @@ y = np.array(df['class'])
 
 # divide data into training and testing samples
 # use model_selection instead of deprecated cross_validation shown in tutorial.
+# train_test_split splits arrays or matrices into random train and test subsets
+# http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html
 X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size=0.2)
 
 # classifier
