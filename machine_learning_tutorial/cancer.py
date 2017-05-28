@@ -13,7 +13,7 @@ https://pythonprogramming.net/k-nearest-neighbors-application-machine-learning-t
 """
 
 input_directory = "../data/input/"
-input_file_name = "breast-cancer-wisconsin-data.txt"
+input_file_name = "breast-cancer-wisconsin-data.csv"
 input_file_path = input_directory + input_file_name
 
 # df is a pandas dataframe
