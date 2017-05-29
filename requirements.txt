@@ -1,3 +1,5 @@
+numpy
+pandas
 quandl
 
 # warning Package requirement sklearn is not satisfied
