@@ -51,3 +51,8 @@ https://anaconda.org/anaconda/quandl
 
 matplotlib was in environment root, but not in machine_learning.
 Installed matplotlib in machine_learning.
+
+## Appendix - run program
+
+    cd machine_learning_tutorial
+    python3 machine_learning_tutorial/stock.py
