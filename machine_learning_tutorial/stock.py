@@ -20,7 +20,19 @@ https://pythonprogramming.net/regression-introduction-machine-learning-tutorial/
 
 style.use('ggplot')
 
+# For security keep quandl api key out of version control.
+# read api key from a file that is ignored.
+# input_directory = "../data/input/"
+# input_file_name = 'quandl_api_key.txt'
+# input_file_path = input_directory + input_file_name
+# rstrip to remove trailing \n
+# quandl_api_key = open(input_file_path, 'r').read().rstrip()
+# print('quandl_api_key', quandl_api_key)
+
 # df is a pandas dataframe
+# df = quandl.get('WIKI/GOOGL', authtoken=quandl_api_key)
+
+# don't need key for infrequent use
 df = quandl.get('WIKI/GOOGL')
 # print(df.head())
 # each column is a "feature"
