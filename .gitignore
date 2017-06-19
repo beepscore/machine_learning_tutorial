@@ -122,6 +122,7 @@ venv/*
 # program data files
 data/*
 !data/input
+data/input/quandl_api_key.txt
 
 # csv files
 *.csv
